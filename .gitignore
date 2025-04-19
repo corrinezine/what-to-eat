@@ -27,4 +27,6 @@ restaurants.json
 restaurants-updated.json
 convert_data.py
 review.py
-update-locations.js 
+update-locations.js
+config.js
+update-locations.html 

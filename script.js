@@ -1,15 +1,14 @@
-import { restaurants } from './data.js';
-
 // 存储已经显示过的餐厅
 let displayedRestaurants = new Set();
 
 // 等待页面加载完成
 document.addEventListener('DOMContentLoaded', function() {
     // 获取DOM元素
-    const button = document.getElementById('button');
-    const table = document.getElementById('table');
+    const button = document.getElementById('startButton');
+    const table = document.querySelector('.table');
     const result = document.getElementById('result');
     const startHint = document.querySelector('.start-hint');
+    const updateButton = document.getElementById('updateLocations');
 
     // 随机选择餐厅
     function getRandomRestaurant() {
@@ -27,24 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
         displayedRestaurants.add(selected);
         
         return selected;
-    }
-
-    // 显示餐厅信息的函数
-    function displayRestaurant(restaurant) {
-        const resultDiv = document.getElementById('result');
-        const restaurantName = restaurant.name.split('（')[0]; // 获取餐厅名称
-        const location = restaurant.name.match(/（(.+)）/); // 提取位置信息
-        
-        let displayName = restaurantName;
-        if (location && location[1]) {
-            displayName += `（${location[1]}）`;
-        }
-        
-        resultDiv.innerHTML = `
-            <h2>${displayName}</h2>
-            <p>${restaurant.review}</p>
-            <p class="source">来自${restaurant.source}</p>
-        `;
     }
 
     // 处理按钮点击
@@ -79,4 +60,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 添加点击事件监听
     button.addEventListener('click', handleClick);
+
+    // 添加更新地址信息按钮的事件监听
+    if (updateButton) {
+        updateButton.addEventListener('click', async () => {
+            updateButton.disabled = true;
+            updateButton.textContent = '正在更新...';
+            try {
+                await updateAllRestaurantLocations();
+                updateButton.textContent = '更新完成';
+                setTimeout(() => {
+                    updateButton.textContent = '更新地址信息';
+                    updateButton.disabled = false;
+                }, 2000);
+            } catch (error) {
+                console.error('更新地址信息失败:', error);
+                updateButton.textContent = '更新失败';
+                setTimeout(() => {
+                    updateButton.textContent = '更新地址信息';
+                    updateButton.disabled = false;
+                }, 2000);
+            }
+        });
+    }
 }); 

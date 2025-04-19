@@ -51,25 +51,34 @@ body {
 }
 
 /* 吃什么按钮 */
-.button {
+.start-button {
     position: absolute;
-    width: 90px;
-    height: auto;
     top: 164px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 3;
+    width: 90px;
+    height: auto;
+    background: none;
+    border: none;
+    padding: 0;
     cursor: pointer;
+    z-index: 3;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.button:hover {
+.start-button:hover {
     transform: translateX(-50%) scale(1.2);
 }
 
-.button:disabled {
+.start-button:disabled {
     opacity: 0.7;
     cursor: not-allowed;
+}
+
+.start-button img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 /* 开始提示文字 */
@@ -168,4 +177,25 @@ body {
     .game-wrapper {
         transform: scale(0.6);
     }
+}
+
+.map-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.map-button {
+    width: 120px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.map-button:hover {
+    transform: scale(1.05);
+}
+
+.map-link a {
+    display: inline-block;
+    text-decoration: none;
 } 
