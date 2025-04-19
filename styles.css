@@ -135,6 +135,20 @@ body {
     cursor: not-allowed;
 }
 
+.start-hint {
+    position: absolute;
+    top: 164px;
+    margin-top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #fff;
+    font-size: 16px !important;
+    z-index: 3;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+}
+
 /* 响应式布局 */
 @media (max-width: 640px) or (max-height: 700px) {
     .elements-container {
