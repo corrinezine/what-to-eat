@@ -37,7 +37,7 @@ function displayRestaurant(restaurant) {
         html += `
             <div class="map-link">
                 <a href="${mapLink}" target="_blank">
-                    <img src="assets/打开地图按钮.png" alt="打开地图" class="map-button">
+                    <img src="./assets/打开地图按钮.png" alt="打开地图" class="map-button">
                 </a>
             </div>
         `;
@@ -85,6 +85,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // 禁用按钮
         button.disabled = true;
         
+        // 添加旋转动画
+        button.style.animation = 'spin 1s linear';
+        
         // 隐藏提示文字
         prompt.style.opacity = '0';
         
@@ -100,6 +103,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (restaurant) {
                 displayRestaurant(restaurant);
             }
+            
+            // 停止旋转动画
+            button.style.animation = '';
             
             // 启用按钮
             button.disabled = false;
