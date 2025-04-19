@@ -4,18 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>今天吃什么？</title>
-  <script type="module" crossorigin src="./assets/main.js"></script>
+    <link rel="icon" type="image/png" href="./assets/%E5%90%83%E4%BB%80%E4%B9%88%E6%8C%89%E9%92%AE.png">
   <link rel="stylesheet" crossorigin href="./assets/main.css">
 </head>
 <body>
     <div class="container">
         <div class="game-wrapper">
             <img src="./assets/%E5%A5%B3%E5%AD%A9.png" alt="女孩" class="girl">
-            <img src="./assets/%E5%9C%86%E5%BD%A2%E9%A4%90%E6%A1%8C2.png" alt="餐桌" class="table" id="table">
-            <img src="./assets/%E5%90%83%E4%BB%80%E4%B9%88%E6%8C%89%E9%92%AE.png" alt="吃什么按钮" class="button" id="button">
-            <div class="start-hint">点击按钮以开始</div>
-            <div class="result" id="result"></div>
+            <img src="./assets/%E5%9C%86%E5%BD%A2%E9%A4%90%E6%A1%8C2.png" alt="餐桌" class="table">
+            <button id="button" class="button">
+                <img src="./assets/%E5%90%83%E4%BB%80%E4%B9%88%E6%8C%89%E9%92%AE.png" alt="开始">
+            </button>
+            <div id="prompt" class="prompt">点击按钮以开始</div>
+            <div id="result" class="result"></div>
         </div>
     </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
 </body>
 </html> 

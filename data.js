@@ -1,5 +1,5 @@
 // 餐厅数据
-window.restaurants = [
+export const restaurants = [
     {
         name: "台乡缘（外滩店）",
         review: "没有人不爱吃外滩店的台乡缘! 道道好吃，随便点。杂鱼啊沙蒜豆面都是基本款了",
