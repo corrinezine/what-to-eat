@@ -78,7 +78,7 @@ body {
     top: 270px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 16px;
+    font-size: 18px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     z-index: 3;
     color: #fff;
@@ -106,7 +106,7 @@ body {
 }
 
 .result p {
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.4;
     margin: 8px 0;
     padding: 0 20px;
@@ -115,12 +115,11 @@ body {
 }
 
 .result .source {
-    font-size: 14px;
+    font-size: 18px;
     color: #fff;
     opacity: 0.8;
     margin-top: 16px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    font-style: italic;
 }
 
 /* 链接样式 */
