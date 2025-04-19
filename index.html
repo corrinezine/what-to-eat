@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>今天吃什么？</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
     <div class="container">
         <div class="game-wrapper">
             <img src="./assets/女孩.png" alt="女孩" class="girl">
             <img src="./assets/圆形餐桌2.png" alt="餐桌" class="table">
-            <button id="startButton" class="start-button">
+            <button id="button" class="button">
                 <img src="./assets/吃什么按钮.png" alt="开始">
             </button>
-            <div class="start-hint">点击按钮以开始</div>
-            <div class="result" id="result"></div>
+            <div id="prompt" class="prompt">点击按钮以开始</div>
+            <div id="result" class="result"></div>
         </div>
     </div>
-    <button id="updateLocations" style="position: fixed; bottom: 10px; right: 10px; opacity: 0.5;">更新地址信息</button>
-    <script src="data.js"></script>
-    <script src="geocoding.js"></script>
-    <script src="script.js"></script>
+
+    <script type="module" src="./geocoding.js"></script>
+    <script type="module" src="./data.js"></script>
+    <script type="module" src="./script.js"></script>
 </body>
 </html> 

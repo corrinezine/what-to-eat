@@ -1,5 +1,5 @@
 // 餐厅数据
-const restaurants = [
+export const restaurants = [
     {
         name: "台乡缘（外滩店）",
         review: "没有人不爱吃外滩店的台乡缘! 道道好吃，随便点。杂鱼啊沙蒜豆面都是基本款了",
@@ -229,7 +229,7 @@ const restaurants = [
     {
         name: "潮兴肠粉店（菜场店）",
         review: "潮兴肠粉店的肠粉是上海最好吃的肠粉之一，皮薄韧性好，馅料实在，酱汁也很香。店面虽小但生意火爆，建议避开高峰期。",
-        source: "小红书",
+        source: "推拿熊",
         address: "上海市静安区宝通路203号-2包运大楼",
         location: "121.478338,31.256202"
     },

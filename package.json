@@ -7,13 +7,22 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "update": "node update-locations.js"
+    "update": "node update-locations.js",
+    "clean": "rm -rf dist"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "keywords": [
+    "restaurant",
+    "random",
+    "food"
+  ],
+  "author": "corrinezine",
+  "license": "MIT",
+  "description": "帮助选择餐厅的网页应用",
   "devDependencies": {
     "vite": "^5.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/corrinezine/what-to-eat.git"
   }
 }
