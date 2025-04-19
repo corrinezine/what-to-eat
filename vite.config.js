@@ -14,5 +14,8 @@ export default defineConfig({
         main: './index.html'
       }
     }
+  },
+  optimizeDeps: {
+    include: ['data.js']
   }
 }) 

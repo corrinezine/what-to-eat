@@ -249,4 +249,6 @@ function generateMapLink(restaurant) {
     const address = encodeURIComponent(restaurant.address);
     
     return `${baseUrl}?position=${position}&name=${name}&address=${address}`;
-} 
+}
+
+export { restaurants, generateMapLink }; 

@@ -1,3 +1,5 @@
+import { restaurants } from './data.js';
+
 // 存储已经显示过的餐厅
 let displayedRestaurants = new Set();
 
