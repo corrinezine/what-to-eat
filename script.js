@@ -1,6 +1,3 @@
-import { restaurants } from './data.js';
-import { generateMapLink } from './geocoding.js';
-
 // 存储已经显示过的餐厅
 let displayedRestaurants = new Set();
 
@@ -13,6 +10,15 @@ restaurants.forEach(restaurant => {
         restaurant.status = "营业中";  // 默认状态为营业中
     }
 });
+
+// 生成地图链接
+function generateMapLink(restaurant) {
+    if (restaurant.location) {
+        const [longitude, latitude] = restaurant.location.split(',');
+        return `https://uri.amap.com/marker?position=${longitude},${latitude}&name=${encodeURIComponent(restaurant.name)}`;
+    }
+    return null;
+}
 
 // 显示餐厅信息
 function displayRestaurant(restaurant) {
