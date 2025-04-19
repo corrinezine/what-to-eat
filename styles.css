@@ -51,6 +51,7 @@ body {
     width: 600px;
     height: 600px;
     z-index: 2;
+    transition: transform 0.3s ease;
 }
 
 /* 按钮样式 */
@@ -163,6 +164,10 @@ body {
     to {
         transform: translateX(-50%) rotate(360deg);
     }
+}
+
+.table.spinning {
+    animation: spin 1s linear;
 }
 
 /* 响应式设计 */

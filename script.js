@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const button = document.getElementById('button');
     const prompt = document.getElementById('prompt');
     const result = document.getElementById('result');
+    const table = document.querySelector('.table');
     const startHint = document.querySelector('.start-hint');
     const updateButton = document.getElementById('updateLocations');
 
@@ -85,8 +86,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // 禁用按钮
         button.disabled = true;
         
-        // 添加旋转动画
-        button.style.animation = 'spin 1s linear';
+        // 添加旋转动画到餐桌
+        table.classList.add('spinning');
         
         // 隐藏提示文字
         prompt.style.opacity = '0';
@@ -104,8 +105,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 displayRestaurant(restaurant);
             }
             
-            // 停止旋转动画
-            button.style.animation = '';
+            // 移除旋转动画
+            table.classList.remove('spinning');
             
             // 启用按钮
             button.disabled = false;
@@ -114,6 +115,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 添加点击事件监听
     button.addEventListener('click', handleClick);
+
+    // 监听动画结束事件
+    table.addEventListener('animationend', () => {
+        table.classList.remove('spinning');
+    });
 
     // 添加更新地址信息按钮的事件监听
     if (updateButton) {
