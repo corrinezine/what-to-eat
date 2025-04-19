@@ -1,6 +1,16 @@
 // 存储已经显示过的餐厅
 let displayedRestaurants = new Set();
 
+// 调试函数：检查数据加载
+function checkDataLoading() {
+    console.log('检查餐厅数据加载状态：', {
+        restaurantsExists: !!window.restaurants,
+        isArray: Array.isArray(window.restaurants),
+        count: window.restaurants ? window.restaurants.length : 0,
+        firstItem: window.restaurants && window.restaurants.length > 0 ? window.restaurants[0] : null
+    });
+}
+
 // 生成地图链接
 function generateMapLink(restaurant) {
     if (restaurant && restaurant.location) {
@@ -12,8 +22,15 @@ function generateMapLink(restaurant) {
 
 // 显示餐厅信息
 function displayRestaurant(restaurant) {
+    console.log('正在显示餐厅信息：', restaurant);
     const resultDiv = document.getElementById('result');
-    if (!resultDiv || !restaurant) return;
+    if (!resultDiv || !restaurant) {
+        console.error('显示餐厅信息失败：', {
+            resultDivExists: !!resultDiv,
+            restaurantExists: !!restaurant
+        });
+        return;
+    }
 
     const mapLink = generateMapLink(restaurant);
     
@@ -36,18 +53,26 @@ function displayRestaurant(restaurant) {
     }
     
     resultDiv.innerHTML = html;
+    console.log('餐厅信息显示完成');
 }
 
 // 获取随机餐厅（排除已关闭的餐厅）
 function getRandomRestaurant() {
+    console.log('开始获取随机餐厅');
     if (!window.restaurants || !Array.isArray(window.restaurants)) {
-        console.error('餐厅数据未正确加载');
+        console.error('餐厅数据未正确加载', {
+            restaurantsExists: !!window.restaurants,
+            isArray: Array.isArray(window.restaurants)
+        });
         return null;
     }
 
     // 如果所有餐厅都已显示过，重置记录
     const openRestaurants = window.restaurants.filter(r => !r.status || r.status === "营业中");
+    console.log('营业中的餐厅数量：', openRestaurants.length);
+    
     if (displayedRestaurants.size >= openRestaurants.length) {
+        console.log('重置已显示餐厅列表');
         displayedRestaurants.clear();
     }
 
@@ -56,12 +81,17 @@ function getRandomRestaurant() {
         (!r.status || r.status === "营业中") && !displayedRestaurants.has(r)
     );
     
+    console.log('可选择的餐厅数量：', availableRestaurants.length);
+    
     if (availableRestaurants.length === 0) {
+        console.log('没有可用的餐厅');
         return null;
     }
     
     const randomIndex = Math.floor(Math.random() * availableRestaurants.length);
     const selected = availableRestaurants[randomIndex];
+    
+    console.log('选中的餐厅：', selected);
     
     // 添加到已显示集合
     displayedRestaurants.add(selected);
@@ -71,9 +101,13 @@ function getRandomRestaurant() {
 
 // 等待页面加载完成
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('页面加载完成，开始初始化');
+    checkDataLoading();
+    
     try {
         // 初始化餐厅数据
         if (window.restaurants && Array.isArray(window.restaurants)) {
+            console.log('开始初始化餐厅数据');
             window.restaurants.forEach(restaurant => {
                 if (!restaurant.source) {
                     restaurant.source = "推拿熊";
@@ -82,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     restaurant.status = "营业中";  // 默认状态为营业中
                 }
             });
+            console.log('餐厅数据初始化完成');
         } else {
             console.error('餐厅数据未正确加载');
             return;
@@ -96,12 +131,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const updateButton = document.getElementById('updateLocations');
 
         if (!button || !prompt || !result || !table) {
-            console.error('页面元素未找到');
+            console.error('页面元素未找到', {
+                buttonExists: !!button,
+                promptExists: !!prompt,
+                resultExists: !!result,
+                tableExists: !!table
+            });
             return;
         }
 
+        console.log('DOM元素获取成功');
+
         // 处理按钮点击
         function handleClick() {
+            console.log('按钮被点击');
             // 禁用按钮
             button.disabled = true;
             
@@ -117,6 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 1秒后显示结果
             setTimeout(() => {
                 try {
+                    console.log('开始生成结果');
                     // 获取随机餐厅
                     const restaurant = getRandomRestaurant();
                     
@@ -124,6 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (restaurant) {
                         displayRestaurant(restaurant);
                     } else {
+                        console.log('没有获取到餐厅信息');
                         result.innerHTML = '<p>暂无可用餐厅信息</p>';
                     }
                 } catch (error) {
@@ -135,16 +180,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // 启用按钮
                     button.disabled = false;
+                    console.log('结果显示完成');
                 }
             }, 1000);
         }
 
         // 添加点击事件监听
         button.addEventListener('click', handleClick);
+        console.log('点击事件监听器添加完成');
 
         // 监听动画结束事件
         table.addEventListener('animationend', () => {
             table.classList.remove('spinning');
+            console.log('动画结束');
         });
 
         // 添加更新地址信息按钮的事件监听
