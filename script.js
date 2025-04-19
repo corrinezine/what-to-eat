@@ -1,68 +1,80 @@
-import { restaurants } from './data.js';
+// 存储已经显示过的餐厅
+let displayedRestaurants = new Set();
 
-// 获取DOM元素
-const table = document.getElementById('table');
-const result = document.getElementById('result');
-const randomButton = document.getElementById('randomButton');
-const startHint = document.querySelector('.start-hint');
+// 等待页面加载完成
+document.addEventListener('DOMContentLoaded', function() {
+    // 获取DOM元素
+    const button = document.getElementById('button');
+    const table = document.getElementById('table');
+    const result = document.getElementById('result');
+    const startHint = document.querySelector('.start-hint');
 
-// 记录已经显示过的餐厅
-let shownRestaurants = new Set();
-let isFirstClick = true;
+    // 随机选择餐厅
+    function getRandomRestaurant() {
+        // 如果所有餐厅都已显示过，重置记录
+        if (displayedRestaurants.size >= restaurants.length) {
+            displayedRestaurants.clear();
+        }
 
-// 随机选择餐厅的函数
-function getRandomRestaurant() {
-    // 如果所有餐厅都显示过了，重置记录
-    if (shownRestaurants.size >= restaurants.length) {
-        shownRestaurants.clear();
+        // 从未显示的餐厅中随机选择
+        const availableRestaurants = restaurants.filter(restaurant => !displayedRestaurants.has(restaurant));
+        const randomIndex = Math.floor(Math.random() * availableRestaurants.length);
+        const selected = availableRestaurants[randomIndex];
+        
+        // 添加到已显示集合
+        displayedRestaurants.add(selected);
+        
+        return selected;
     }
 
-    // 获取未显示过的餐厅
-    const availableRestaurants = restaurants.filter(restaurant => !shownRestaurants.has(restaurant.name));
-    const randomIndex = Math.floor(Math.random() * availableRestaurants.length);
-    const selectedRestaurant = availableRestaurants[randomIndex];
+    // 显示餐厅信息的函数
+    function displayRestaurant(restaurant) {
+        const resultDiv = document.getElementById('result');
+        const restaurantName = restaurant.name.split('（')[0]; // 获取餐厅名称
+        const location = restaurant.name.match(/（(.+)）/); // 提取位置信息
+        
+        let displayName = restaurantName;
+        if (location && location[1]) {
+            displayName += `（${location[1]}）`;
+        }
+        
+        resultDiv.innerHTML = `
+            <h2>${displayName}</h2>
+            <p>${restaurant.review}</p>
+            <p class="source">来自${restaurant.source}</p>
+        `;
+    }
 
-    // 记录已显示的餐厅
-    shownRestaurants.add(selectedRestaurant.name);
-
-    return selectedRestaurant;
-}
-
-// 显示餐厅信息的函数
-function displayRestaurant(restaurant) {
-    let locationText = restaurant.location ? `\n📍 ${restaurant.location}` : '';
-    let recommendationsText = restaurant.recommendations.length > 0 
-        ? `\n\n推荐菜品：\n${restaurant.recommendations.join('、')}`
-        : '';
-    
-    result.innerHTML = `
-        <h2>${restaurant.name}</h2>
-        <p>${restaurant.cuisine}${locationText}${recommendationsText}</p>
-    `;
-}
-
-// 点击按钮时的处理函数
-function handleClick() {
-    // 如果是第一次点击，隐藏提示文字
-    if (isFirstClick) {
+    // 处理按钮点击
+    function handleClick() {
+        // 禁用按钮
+        button.disabled = true;
+        
+        // 隐藏提示文字
         startHint.style.display = 'none';
-        isFirstClick = false;
+        
+        // 添加旋转动画
+        table.style.animation = 'spin 1s ease-out';
+        
+        // 清空结果区域
+        result.innerHTML = '';
+        
+        // 1秒后显示结果
+        setTimeout(() => {
+            // 停止旋转
+            table.style.animation = 'none';
+            
+            // 获取随机餐厅
+            const restaurant = getRandomRestaurant();
+            
+            // 显示结果
+            displayRestaurant(restaurant);
+            
+            // 启用按钮
+            button.disabled = false;
+        }, 1000);
     }
 
-    // 添加旋转动画
-    table.classList.add('spinning');
-    
-    // 禁用按钮
-    randomButton.disabled = true;
-    
-    // 1秒后停止旋转并显示结果
-    setTimeout(() => {
-        table.classList.remove('spinning');
-        const restaurant = getRandomRestaurant();
-        displayRestaurant(restaurant);
-        randomButton.disabled = false;
-    }, 1000);
-}
-
-// 添加点击事件监听器
-randomButton.addEventListener('click', handleClick); 
+    // 添加点击事件监听
+    button.addEventListener('click', handleClick);
+}); 

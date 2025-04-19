@@ -3,60 +3,46 @@
     src: url('assets/HYPixel11pxJ-2.ttf') format('truetype');
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: 'HYPixel', sans-serif;
-    min-height: 100vh;
     margin: 0;
     padding: 0;
+    height: 100vh;
+    background: url('assets/背景.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'HYPixel', sans-serif;
     overflow: hidden;
 }
 
 .container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    background: url('assets/背景.png') center center / cover no-repeat;
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    height: 100vh;
     padding-top: 5vh;
 }
 
 .game-wrapper {
     position: relative;
-    width: 100%;
-    max-width: 1000px;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.elements-container {
-    position: relative;
     width: 600px;
     height: 490px;
+    transform-origin: center top;
 }
 
+/* 女孩图片 */
 .girl {
     position: absolute;
-    width: 287px; /* 383 * 0.75 */
-    height: 277px; /* 369 * 0.75 */
+    width: 287px;
+    height: 277px;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1;
 }
 
-.table-container {
+/* 圆形餐桌 */
+.table {
     position: absolute;
-    width: 600px; /* 802 * 0.75 */
+    width: 600px;
     height: 600px;
     top: 160px;
     left: 50%;
@@ -64,106 +50,123 @@ body {
     z-index: 2;
 }
 
-.table {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: transform 0.5s ease;
+/* 吃什么按钮 */
+.button {
+    position: absolute;
+    width: 90px;
+    height: auto;
+    top: 164px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.table.spinning {
-    animation: spin 1s linear infinite;
+.button:hover {
+    transform: translateX(-50%) scale(1.2);
 }
 
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 
+/* 开始提示文字 */
+.start-hint {
+    position: absolute;
+    top: 270px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 3;
+    color: #fff;
+}
+
+/* 餐厅信息显示区域 */
 .result {
     position: absolute;
-    top: 50%;
+    top: 364px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     text-align: center;
-    color: #fff;
+    z-index: 4;
+    max-width: 400px;
     width: 80%;
-    z-index: 1;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: #fff;
 }
 
 .result h2 {
     font-size: 24px;
-    line-height: 1.5;
-    margin-bottom: 8px;
+    margin-bottom: 16px;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: #fff;
 }
 
 .result p {
     font-size: 16px;
     line-height: 1.4;
-    white-space: pre-line;
-}
-
-.random-button {
-    position: absolute;
-    top: 164px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 3;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.random-button img {
-    width: 90px;
-    height: auto;
-}
-
-.random-button:hover {
-    transform: translateX(-50%) scale(1.2);
-}
-
-.random-button:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-}
-
-.start-hint {
-    position: absolute;
-    top: 164px;
-    margin-top: 100px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    color: #fff;
-    font-size: 16px !important;
-    z-index: 3;
+    margin: 8px 0;
+    padding: 0 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    white-space: nowrap;
+    color: #fff;
 }
 
-/* 响应式布局 */
-@media (max-width: 640px) or (max-height: 700px) {
-    .elements-container {
+.result .source {
+    font-size: 14px;
+    color: #fff;
+    opacity: 0.8;
+    margin-top: 16px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-style: italic;
+}
+
+/* 链接样式 */
+.result a {
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 12px;
+    padding: 4px 8px;
+}
+
+.result a:hover {
+    text-decoration: underline;
+}
+
+/* 地图链接样式 */
+.result .map-link {
+    margin-top: 12px;
+    display: inline-block;
+}
+
+/* 旋转动画 */
+@keyframes spin {
+    from {
+        transform: translateX(-50%) rotate(0deg);
+    }
+    to {
+        transform: translateX(-50%) rotate(360deg);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 640px), (max-height: 700px) {
+    .game-wrapper {
         transform: scale(0.8);
     }
 }
 
-@media (max-width: 520px) or (max-height: 600px) {
-    .elements-container {
+@media (max-width: 520px), (max-height: 600px) {
+    .game-wrapper {
         transform: scale(0.7);
     }
 }
 
-@media (max-width: 420px) or (max-height: 500px) {
-    .elements-container {
+@media (max-width: 420px), (max-height: 500px) {
+    .game-wrapper {
         transform: scale(0.6);
     }
 } 
