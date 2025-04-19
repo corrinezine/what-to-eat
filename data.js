@@ -1,4 +1,4 @@
-const restaurants = [
+export const restaurants = [
     {"name": "台乡缘", "cuisine": "台州菜", "location": "外滩", "recommendations": ["杂鱼", "沙蒜豆面"]},
     {"name": "债晶", "cuisine": "台州菜", "location": "外滩", "recommendations": ["豆腐鱼", "肉燕汤"]},
     {"name": "柿合缘", "cuisine": "甬府旗下", "location": "国金", "recommendations": ["鱼头配油条", "炙子羊肉"]},

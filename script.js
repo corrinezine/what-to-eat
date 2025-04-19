@@ -1,3 +1,5 @@
+import { restaurants } from './data.js';
+
 // 获取DOM元素
 const table = document.getElementById('table');
 const result = document.getElementById('result');
