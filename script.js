@@ -1,6 +1,9 @@
 // 存储已经显示过的餐厅
 let displayedRestaurants = new Set();
 
+// 导入地图按钮图片
+import mapButtonImage from './assets/打开地图按钮.png';
+
 // 调试函数：检查数据加载
 function checkDataLoading() {
     console.log('检查餐厅数据加载状态：', {
@@ -46,7 +49,7 @@ function displayRestaurant(restaurant) {
         html += `
             <div class="map-link">
                 <a href="${mapLink}" target="_blank">
-                    <img src="./assets/打开地图按钮.png" alt="打开地图" class="map-button">
+                    <img src="${mapButtonImage}" alt="打开地图" class="map-button">
                 </a>
             </div>
         `;

@@ -16,7 +16,13 @@ export default defineConfig({
       output: {
         entryFileNames: 'assets/[name].js',
         chunkFileNames: 'assets/[name].js',
-        assetFileNames: 'assets/[name].[ext]'
+        assetFileNames: (assetInfo) => {
+          // 保持中文文件名不被编码
+          if (assetInfo.name.endsWith('.png')) {
+            return `assets/${assetInfo.name}`;
+          }
+          return 'assets/[name].[ext]';
+        }
       }
     }
   },
