@@ -1,16 +1,6 @@
 // 存储已经显示过的餐厅
 let displayedRestaurants = new Set();
 
-// 为所有餐厅添加状态字段
-restaurants.forEach(restaurant => {
-    if (!restaurant.source) {
-        restaurant.source = "推拿熊";
-    }
-    if (!restaurant.status) {
-        restaurant.status = "营业中";  // 默认状态为营业中
-    }
-});
-
 // 生成地图链接
 function generateMapLink(restaurant) {
     if (restaurant.location) {
@@ -49,12 +39,12 @@ function displayRestaurant(restaurant) {
 // 获取随机餐厅（排除已关闭的餐厅）
 function getRandomRestaurant() {
     // 如果所有餐厅都已显示过，重置记录
-    if (displayedRestaurants.size >= restaurants.filter(r => r.status === "营业中").length) {
+    if (displayedRestaurants.size >= window.restaurants.filter(r => r.status === "营业中").length) {
         displayedRestaurants.clear();
     }
 
     // 从未显示的营业中餐厅中随机选择
-    const availableRestaurants = restaurants.filter(r => 
+    const availableRestaurants = window.restaurants.filter(r => 
         r.status === "营业中" && !displayedRestaurants.has(r)
     );
     
@@ -73,6 +63,16 @@ function getRandomRestaurant() {
 
 // 等待页面加载完成
 document.addEventListener('DOMContentLoaded', function() {
+    // 初始化餐厅数据
+    window.restaurants.forEach(restaurant => {
+        if (!restaurant.source) {
+            restaurant.source = "推拿熊";
+        }
+        if (!restaurant.status) {
+            restaurant.status = "营业中";  // 默认状态为营业中
+        }
+    });
+
     // 获取DOM元素
     const button = document.getElementById('button');
     const prompt = document.getElementById('prompt');
