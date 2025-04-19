@@ -4,9 +4,11 @@ import { restaurants } from './data.js';
 const table = document.getElementById('table');
 const result = document.getElementById('result');
 const randomButton = document.getElementById('randomButton');
+const startHint = document.querySelector('.start-hint');
 
 // 记录已经显示过的餐厅
 let shownRestaurants = new Set();
+let isFirstClick = true;
 
 // 随机选择餐厅的函数
 function getRandomRestaurant() {
@@ -41,6 +43,12 @@ function displayRestaurant(restaurant) {
 
 // 点击按钮时的处理函数
 function handleClick() {
+    // 如果是第一次点击，隐藏提示文字
+    if (isFirstClick) {
+        startHint.style.display = 'none';
+        isFirstClick = false;
+    }
+
     // 添加旋转动画
     table.classList.add('spinning');
     
