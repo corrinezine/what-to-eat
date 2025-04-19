@@ -37,7 +37,7 @@ function displayRestaurant(restaurant) {
         html += `
             <div class="map-link">
                 <a href="${mapLink}" target="_blank">
-                    <img src="/assets/打开地图按钮.png" alt="打开地图" class="map-button">
+                    <img src="assets/打开地图按钮.png" alt="打开地图" class="map-button">
                 </a>
             </div>
         `;
