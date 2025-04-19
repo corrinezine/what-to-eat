@@ -5,6 +5,14 @@ export default defineConfig({
     port: 5173,
     open: true
   },
-  publicDir: 'assets',
-  base: '/'
+  base: './',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    rollupOptions: {
+      input: {
+        main: './index.html'
+      }
+    }
+  }
 }) 
